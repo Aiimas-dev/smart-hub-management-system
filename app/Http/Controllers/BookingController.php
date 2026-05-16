@@ -7,59 +7,43 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(Booking::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $booking = Booking::create($request->all());
+
+        return response()->json([
+            'message' => 'Booking berhasil dibuat',
+            'data' => $booking
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Booking $booking)
+    public function show(string $id)
     {
-        //
+        return response()->json(Booking::findOrFail($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Booking $booking)
+    public function update(Request $request, string $id)
     {
-        //
+        $booking = Booking::findOrFail($id);
+
+        $booking->update($request->all());
+
+        return response()->json([
+            'message' => 'Booking berhasil diupdate'
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Booking $booking)
+    public function destroy(string $id)
     {
-        //
-    }
+        Booking::destroy($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Booking $booking)
-    {
-        //
+        return response()->json([
+            'message' => 'Booking berhasil dihapus'
+        ]);
     }
 }

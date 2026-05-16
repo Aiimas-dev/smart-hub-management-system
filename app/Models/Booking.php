@@ -7,20 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $fillable = [
-        'user_id',
-        'equipment_id',
-        'borrow_date',
-        'return_date',
+        'member_name',
+        'equipment_name',
+        'booking_date',
         'status'
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function equipment()
-    {
-        return $this->belongsTo(Equipment::class);
-    }
 }
